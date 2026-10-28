@@ -37,12 +37,26 @@ Editorial Stay — 머무는 시간을 편집하는 스테이 / *Stay with comfo
 
 ## 3. 글꼴
 
-- **Hahmlet**: 제목, 로고 글자, 리드 문장, 인용. (Google Fonts)
-- **Pretendard**: 본문과 UI. 불러올 수 없으면 Noto Sans KR.
+- **국문은 전부 Pretendard** (불러올 수 없으면 Noto Sans KR). 제목 600~700, 리드 문장 500, 본문 400.
+- **국문 세리프(명조) 금지.** Hahmlet을 포함해 한글에는 세리프를 쓰지 않습니다.
+- **영문 제목만 세리프 Hahmlet**: 워드마크, 영문 제목, 태그라인, 영문 리드 문장과 인용. 영문 라벨과 본문은 Pretendard.
+- 국문과 영문이 함께 있는 소재는 영문 줄은 Hahmlet, 국문 줄은 Pretendard로 따로 설정합니다. 예: 태그라인 "Stay with comfort,"는 세리프, 그 아래 "머무는 시간을 편집하는 스테이"는 Pretendard.
 - **이탤릭 금지.** 제3의 글꼴, 장식 글꼴 금지.
 - 한글과 영문이 한 줄에 있으면 영문·숫자를 약 10% 크게 (예: 한글 9.5, 영문 10.5).
 - 작은 라벨은 대문자, 자간 0.08~0.12em.
 - **한국어 줄바꿈은 단어 단위**: CSS `word-break: keep-all; overflow-wrap: break-word;`. 단어나 음절이 중간에서 끊기지 않게 줄을 나눕니다. 일본어·중국어는 `word-break: normal; line-break: strict;`로 두고, 가타카나 단어와 버튼 이름은 `white-space: nowrap`으로 묶습니다.
+
+글꼴 불러오기 (Hahmlet은 영문 글자만 담은 부분 글꼴이라, 한글을 실수로 이 글꼴로 지정해도 Pretendard로 나옵니다):
+
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;700&text=%20!%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%E2%80%98%E2%80%99%E2%80%9C%E2%80%9D%E2%80%93%E2%80%94%E2%80%A6%C2%B7%E2%80%A2%C3%A9%C3%97%E2%86%92&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+```
+
+```css
+--font-display: "Hahmlet", "Pretendard", "Noto Sans KR", sans-serif; /* 영문 제목 전용 */
+--font-body: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; /* 국문, UI, 본문 */
+```
 
 ## 4. 형태와 레이아웃
 
@@ -79,7 +93,7 @@ Editorial Stay — 머무는 시간을 편집하는 스테이 / *Stay with comfo
 
 이미지 프롬프트에는 위 규칙을 영어로 풀어 쓰세요. 예:
 *warm cream paper background (#F6F2E6), ink-black thin hairline details, one muted rust-red accent (#8C3A2D), generous empty space, quiet editorial mood, no gradients, no shadows, no italic type, no emoji.*
-이미지 속 글자는 글꼴이 정확히 나오지 않으므로 최소로 하거나, 글자를 얹을 자리를 비워 두세요.
+이미지 속 글자는 글꼴이 정확히 나오지 않으므로 최소로 하거나, 글자를 얹을 자리를 비워 두세요. 한글을 넣어야 하면 고딕(산세리프)으로, 세리프는 영문에만 쓰라고 지시하세요.
 
 ## 9. 기본 정보
 
@@ -94,9 +108,10 @@ Editorial Stay — 머무는 시간을 편집하는 스테이 / *Stay with comfo
 | `README.md` | 이 문서 (핵심 규칙) |
 | `design-system.md` | 디자인 시스템 상세 설명 (영문, 결정 기록 포함) |
 | `tokens.css` | 색, 글꼴, 간격, 인쇄 값, 줄바꿈 규칙 (CSS 변수) |
+| `fonts.css` | 글꼴 불러오기 (영문 전용 Hahmlet + Pretendard) |
 | `swatches.png` | 색, 글꼴, 규칙, 로고를 한 장에 모은 견본 |
 | `logos/` | 로고 파일 |
-| `examples/` | 적용 예시: 엽서 앞면 2종, 엽서 뒷면, 빵봉지 스티커 |
+| `examples/` | 적용 예시: 엽서 앞면 2종, 엽서 뒷면, 빵봉지 스티커(국문 고딕 버전) |
 
 ## 관련 저장소
 

@@ -1,4 +1,4 @@
-/* Staydimansion design tokens — colors, type, spacing, print, base (combined for reading) */
+/* Staydimansion design tokens — colors, type, spacing, print, base (combined for reading). Fonts: see fonts.css */
 
 /* ===== tokens/colors.css ===== */
 :root {
@@ -41,9 +41,10 @@
 
 /* ===== tokens/typography.css ===== */
 :root {
-  /* Italic is not used in Staydimansion (decided 2026-09-19). Lead lines and quotes use upright Hahmlet. */
-  --font-display-italic: var(--font-display); /* DEPRECATED alias, renders upright Hahmlet. Do not set font-style: italic. */
-  --font-display: "Hahmlet", "Noto Serif KR", serif;   /* headings, wordmark, lead lines */
+  /* Italic is not used in Staydimansion (decided 2026-09-19). English lead lines and quotes use upright Hahmlet; Korean ones use Pretendard. */
+  --font-display-italic: var(--font-display); /* DEPRECATED alias, renders the display stack, upright. Do not set font-style: italic. */
+  /* ENGLISH display only: wordmark, English titles, taglines, English lead lines. fonts.css loads a Latin-only Hahmlet subset, so Korean text in this stack renders in Pretendard. No Korean serif (decided 2026-10-28). */
+  --font-display: "Hahmlet", "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
   --font-body: "Pretendard", -apple-system, "Malgun Gothic", sans-serif; /* UI + body */
   --font-mono-label: "Pretendard", monospace; /* used at small size + wide tracking, not a real mono */
 

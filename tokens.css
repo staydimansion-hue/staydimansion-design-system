@@ -1,0 +1,130 @@
+/* Staydimansion design tokens — colors, type, spacing, print, base (combined for reading) */
+
+/* ===== tokens/colors.css ===== */
+:root {
+  /* Base — page & surfaces (use ~80% of any composition) */
+  --color-page: #F6F2E6;
+  --color-page-deep: #EFE6D6;
+  --color-linen: #E2D6BD;
+  --color-card: #FFFFFF;
+
+  /* Ink — text & structure (~15%) */
+  --color-ink: #1F1A16;
+  --color-ink-70: #5B5249;
+  --color-olive: #6E695B;
+  --color-ink-40: #A39A87;
+
+  /* Accent — CTA & emphasis only (~5% combined, max 2 accents per screen) */
+  --color-rust: #8C3A2D;
+  --color-rust-deep: #5D231C;
+  --color-brass: #B69A5B;
+  --color-rule: #E9E1CD;
+
+  /* Semantic aliases */
+  --surface-page: var(--color-page);
+  --surface-card: var(--color-card);
+  --surface-sunken: var(--color-page-deep);
+  --surface-inverse: var(--color-ink);
+  --text-primary: var(--color-ink);
+  --text-secondary: var(--color-ink-70);
+  --text-muted: var(--color-olive);
+  --text-inverse: var(--color-page);
+  --text-cta: var(--color-rust);
+  --border-hairline: var(--color-rule);
+  --border-strong: var(--color-ink-40);
+  --accent-cta: var(--color-rust);
+  --accent-cta-hover: var(--color-rust-deep);
+  --accent-highlight: var(--color-brass);
+
+  /* Never use --color-brass for text on --color-page — contrast 2.1:1, fails WCAG. */
+}
+
+/* ===== tokens/typography.css ===== */
+:root {
+  /* Italic is not used in Staydimansion (decided 2026-09-19). Lead lines and quotes use upright Hahmlet. */
+  --font-display-italic: var(--font-display); /* DEPRECATED alias, renders upright Hahmlet. Do not set font-style: italic. */
+  --font-display: "Hahmlet", "Noto Serif KR", serif;   /* headings, wordmark, lead lines */
+  --font-body: "Pretendard", -apple-system, "Malgun Gothic", sans-serif; /* UI + body */
+  --font-mono-label: "Pretendard", monospace; /* used at small size + wide tracking, not a real mono */
+
+  /* Type scale — reconstructed from the brand guide's scale table (source scan was
+     too low-resolution to confirm exact px/line-height; treat as a faithful best
+     estimate and confirm against the original file if pixel-exact values matter). */
+  --text-display-01-size: 56px;   --text-display-01-line: 64px; --text-display-01-tracking: -0.01em;
+  --text-display-02-size: 40px;   --text-display-02-line: 48px; --text-display-02-tracking: -0.01em;
+  --text-heading-01-size: 28px;   --text-heading-01-line: 36px; --text-heading-01-tracking: 0;
+  --text-lead-size: 20px;         --text-lead-line: 32px;       --text-lead-tracking: 0;
+  --text-body-size: 16px;         --text-body-line: 26px;       --text-body-tracking: 0;
+  --text-label-size: 12px;        --text-label-line: 16px;      --text-label-tracking: 0.08em;
+}
+
+/* ===== tokens/spacing.css ===== */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  --grid-columns: 12;
+  --grid-gutter: var(--space-4);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --border-width: 1px; /* hairline is the system's only structural line weight */
+}
+
+/* ===== tokens/print.css ===== */
+:root {
+  /* Print — business card (Korea standard, landscape) */
+  --print-card-trim-w: 90mm;
+  --print-card-trim-h: 50mm;
+  --print-bleed: 3mm;                 /* each side */
+  --print-card-bleed-w: 96mm;         /* trim + 2 x bleed */
+  --print-card-bleed-h: 56mm;
+  --print-safe-inset: 3mm;            /* keep all type and logo at least this far inside the trim line */
+
+  /* CMYK builds for the palette. CSS cannot render CMYK; these strings are the values to give a printer.
+     Converted from sRGB with the Reference SWOP profile (RSWOP.icm) and rounded, on 2026-09-19.
+     Korean printers often use their own profile (Japan Color 2001 Coated, Coated FOGRA39...): confirm with the printer. */
+  --cmyk-page:      "C3 M4 Y10 K0";
+  --cmyk-page-deep: "C6 M7 Y15 K0";
+  --cmyk-linen:     "C10 M11 Y24 K1";
+  --cmyk-ink:       "C0 M0 Y0 K100";  /* type: single-plate K. The 4-colour conversion is C11 M13 Y11 K89 (rich black), not for small type */
+  --cmyk-ink-70:    "C34 M36 Y42 K56";
+  --cmyk-olive:     "C35 M32 Y43 K43";
+  --cmyk-ink-40:    "C28 M24 Y36 K13";
+  --cmyk-rust:      "C36 M89 Y83 K13";  /* total ink 221% */
+  --cmyk-rust-deep: "C47 M84 Y67 K47";
+  --cmyk-brass:     "C24 M31 Y74 K2";
+
+  /* Spot (별색) candidates. Approximate matches only: confirm against a physical Formula Guide on the actual paper. */
+  --spot-rust: "PANTONE 7594 C";      /* Pantone lists about #7C3A2D; alternative PANTONE 7526 C, about #8A391B */
+}
+
+/* ===== tokens/base.css ===== */
+/* Korean line-breaking (added 2026-09-23): keep each word and syllable cluster intact
+   instead of breaking mid-word at the wrap point. Default browser wrapping breaks Korean
+   text between any two characters, which reads as awkward, orphaned syllables — the
+   opposite of this system's quiet, considered voice.
+   Design Components on a canvas are self-contained and cannot import this file: copy
+   this same rule into every artboard's own <helmet><style> body{...} rule too. */
+body {
+  word-break: keep-all;      /* never split a word across lines */
+  overflow-wrap: break-word; /* still allow breaking one long unbreakable token, e.g. a URL */
+}
+
+/* Added 2026-10-14: keep-all means "no break between CJK characters", which is right for Korean
+   (words have spaces) but wrong for Japanese and Chinese (no spaces: lines would only break at
+   punctuation). Set lang="ja" / lang="zh-Hans" on those blocks. To stop a katakana word, a noun
+   or a button label from splitting, wrap it in a white-space: nowrap span. */
+:lang(ja), :lang(zh), :lang(en) {
+  word-break: normal;
+}
+:lang(ja), :lang(zh) {
+  line-break: strict;
+}
